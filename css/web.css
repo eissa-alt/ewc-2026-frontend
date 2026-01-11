@@ -1,0 +1,182 @@
+html {
+   scroll-behavior: smooth;
+}
+
+#nprogress .bar {
+   /* background-color: #df1b22 !important; */
+   background-color: #4E442D !important;
+}
+/* 
+@keyframes drift {
+   0% {
+      transform: translate(0, 0);
+   }
+   100% {
+      transform: translate(-100px, -100px);
+   }
+} */
+
+body {
+   background-color: #000000;
+   position: relative;
+   overflow-x: hidden;
+}
+
+main {
+   /* background-color: #000000; */
+}
+
+.flip-x {
+   transform: scaleX(-1);
+}
+
+/* 
+input[type="radio"] + label span {
+    transition: background .2s,
+      transform .2s;
+}
+
+input[type="radio"] + label span:hover,
+input[type="radio"] + label:hover span{
+  transform: scale(1.2);
+} 
+
+input[type="radio"]:checked + label span {
+  background-color: #3490DC; 
+  box-shadow: 0px 0px 0px 2px white inset;
+}
+
+input[type="radio"]:checked + label{
+   color: #3490DC; 
+} */
+
+.custom-input {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   background-color: transparent;
+   /* border-color: #495057; */
+   border-width: 1px;
+   font-weight: 500;
+   padding: 8px 12px;
+   font-size: 16px;
+   line-height: 1.5;
+}
+
+/* -------- Autofill fix (Chrome/Edge/Safari) -------- */
+.custom-input:-webkit-autofill,
+.custom-input:-webkit-autofill:hover,
+.custom-input:-webkit-autofill:focus,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+   /* -webkit-text-fill-color:  none !important; */
+
+   /* keep rounded shape consistent */
+
+   /* prevent flash of yellow/blue */
+   transition: background-color 99999s ease 0s, color 99999s ease 0s;
+}
+
+.required-label::after {
+   content: '*';
+   color: red;
+}
+
+textarea {
+   resize: none;
+}
+
+.absolute-center {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+}
+
+.absolute-v-center {
+   position: absolute;
+   top: 50%;
+   transform: translate(0, -50%);
+}
+
+/* fix box-shadow input tailwind3/tailwindform/react-select  */
+.react-select input {
+   box-shadow: none !important;
+}
+
+.lottie-fix svg {
+   cursor: default;
+}
+
+.brand-bg {
+   /* border-image: linear-gradient(to right, red, red); */
+   background: rgb(152, 124, 75);
+   background: linear-gradient(
+      -116deg,
+      rgba(152, 124, 75, 1) 14%,
+      rgba(78, 68, 45, 1) 67%,
+      rgba(78, 68, 45, 1) 100%
+   );
+   border-width: 1px;
+   border-style: solid;
+   border-image: linear-gradient(
+         -116deg,
+         rgba(152, 124, 75, 1) 14%,
+         rgba(78, 68, 45, 1) 67%,
+         rgba(78, 68, 45, 1) 100%
+      )
+      1;
+}
+
+[dir='ltr'] .polygon-btn {
+   clip-path: polygon(0 0, 90% 0, 100% 100%, 0% 100%);
+}
+
+[dir='rtl'] .polygon-btn {
+   clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+/* 
+.polygon-btn:hover {
+   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+} */
+
+/* =========================================================
+   DARK THEME SCROLLBAR STYLING
+   For all dark-themed dropdowns (Listbox.Options, country-list, etc.)
+   ========================================================= */
+
+/* Webkit scrollbar (Chrome, Safari, Edge) */
+[role='listbox'],
+.ui-phone .country-list {
+   scrollbar-width: thin;
+   scrollbar-color: #7f8694 #495057; /* thumb track */
+}
+
+[role='listbox']::-webkit-scrollbar,
+.ui-phone .country-list::-webkit-scrollbar {
+   width: 4px;
+}
+
+[role='listbox']::-webkit-scrollbar-track,
+.ui-phone .country-list::-webkit-scrollbar-track {
+   background: #495057; /* dark gray track */
+}
+
+[role='listbox']::-webkit-scrollbar-thumb,
+.ui-phone .country-list::-webkit-scrollbar-thumb {
+   background: #7f8694; /* gray thumb */
+   border-radius: 2px;
+}
+
+[role='listbox']::-webkit-scrollbar-thumb:hover,
+.ui-phone .country-list::-webkit-scrollbar-thumb:hover {
+   background: #6c757d; /* darker gray on hover */
+}

@@ -1,0 +1,189 @@
+/* =========================================================
+   PHONE INPUT (V2)
+   Clean, consistent styling for react-phone-input-2
+   ========================================================= */
+
+/* ---- Theme variables (override per project/theme) ---- */
+:root {
+   --ui-phone-border: #495057; /* dark gray */
+   --ui-phone-text: #ffffff; /* white */
+   --ui-phone-placeholder: #7f8694; /* gray */
+   --ui-phone-bg: transparent; /* dark background */
+   --ui-phone-radius: 12px; /* rounded-none */
+   --ui-phone-height: 44px; /* h-11 */
+
+   --ui-phone-focus-border: #987c4b; /* EWC gold */
+   --ui-phone-focus-ring: 0 0 0 3px rgba(152, 124, 75, 0.5); /* EWC gold ring */
+
+   --ui-phone-error: #ff0848;
+   --ui-phone-disabled-bg: #374151; /* dark gray */
+
+   /* flag sizing */
+   --ui-phone-flag-w: 44px; /* same as height */
+   --ui-phone-flag-gap: 8px; /* space between flag and text */
+}
+
+/* ---- Ensure the library container is full width ---- */
+.ui-phone .react-tel-input {
+   position: relative;
+   display: block;
+   width: 100% !important;
+}
+
+/* ---- Unified outer box (flag + input) ---- */
+.ui-phone {
+   position: relative;
+   width: 100%;
+   border: 1px solid var(--ui-phone-border);
+   background: var(--ui-phone-bg);
+   border-radius: var(--ui-phone-radius);
+   transition: box-shadow 0.15s ease, border-color 0.15s ease;
+   overflow: visible; /* prevent ring clipping */
+}
+
+/* ---- Focus (non-error) ---- */
+.ui-phone:focus-within {
+   border-color: var(--ui-phone-focus-border);
+   box-shadow: var(--ui-phone-focus-ring);
+   outline: none;
+}
+
+/* ---- Error (always red border; red outline only on focus) ---- */
+.ui-phone.is-error {
+   border-color: var(--ui-phone-error) !important;
+   box-shadow: none !important;
+   z-index: 2;
+}
+.ui-phone.is-error:focus-within {
+   outline: 3px solid rgba(255, 8, 72, 0.25) !important;
+   /* outline-offset: 2px; */
+}
+
+/* ---- Disabled ---- */
+.ui-phone.is-disabled {
+   background: var(--ui-phone-disabled-bg);
+   cursor: not-allowed;
+}
+
+/* =========================================================
+   FLAG AREA
+   ========================================================= */
+
+/* fix white box and spacing around flag */
+.ui-phone .flag-dropdown,
+.ui-phone .flag-dropdown.open,
+.ui-phone .selected-flag {
+   background: transparent !important;
+   box-shadow: none !important;
+   padding: 0 !important;
+   border: 0 !important;
+}
+
+/* align flag vertically, small left space */
+.ui-phone .selected-flag {
+   width: var(--ui-phone-flag-w);
+   height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding-left: 8px !important;
+}
+
+/* transparent flag element itself */
+.ui-phone .selected-flag .flag {
+   background-color: transparent !important;
+}
+
+/* caret icon */
+.ui-phone .selected-flag .arrow {
+   background: transparent !important;
+   border-top-color: #7f8694 !important; /* gray chevron */
+}
+
+/* position of flag dropdown button */
+.ui-phone .flag-dropdown {
+   position: absolute !important;
+   inset: 0 auto 0 0;
+   width: var(--ui-phone-flag-w);
+   height: 100%;
+   border-top-left-radius: var(--ui-phone-radius);
+   border-bottom-left-radius: var(--ui-phone-radius);
+   z-index: 3;
+}
+
+/* =========================================================
+   INPUT FIELD
+   ========================================================= */
+
+.ui-phone .form-control {
+   width: 100% !important;
+   height: var(--ui-phone-height) !important;
+   border: 0 !important;
+   background: transparent !important;
+   color: var(--ui-phone-text);
+   font-size: 16px;
+   font-weight: 600;
+   padding-left: calc(var(--ui-phone-flag-w) + var(--ui-phone-flag-gap)) !important;
+   padding-right: 12px;
+   border-top-right-radius: var(--ui-phone-radius);
+   border-bottom-right-radius: var(--ui-phone-radius);
+   outline: none !important;
+   box-shadow: none !important;
+}
+
+.ui-phone .form-control::placeholder {
+   color: var(--ui-phone-placeholder);
+}
+
+/* =========================================================
+   AUTOFILL FIX (Chrome/Safari)
+   ========================================================= */
+.ui-phone .form-control:-webkit-autofill,
+.ui-phone .form-control:-webkit-autofill:hover,
+.ui-phone .form-control:-webkit-autofill:focus,
+.ui-phone .form-control:-webkit-autofill:active {
+   -webkit-box-shadow: 0 0 0 1000px var(--ui-phone-bg) inset !important;
+   box-shadow: 0 0 0 1000px var(--ui-phone-bg) inset !important;
+   -webkit-text-fill-color: var(--ui-phone-text) !important;
+   border-top-right-radius: var(--ui-phone-radius) !important;
+   border-bottom-right-radius: var(--ui-phone-radius) !important;
+   transition: background-color 99999s ease 0s, color 99999s ease 0s;
+}
+
+/* =========================================================
+   COUNTRY DROPDOWN (dark theme)
+   ========================================================= */
+.ui-phone .country-list {
+   max-height: 280px;
+   z-index: 9999;
+}
+
+/* Scrollbar styling for dark theme */
+.ui-phone .country-list::-webkit-scrollbar {
+   width: 4px;
+}
+
+.ui-phone .country-list::-webkit-scrollbar-track {
+   background: #495057; /* dark gray track */
+}
+
+.ui-phone .country-list::-webkit-scrollbar-thumb {
+   background: #7f8694; /* gray thumb */
+   border-radius: 2px;
+}
+
+.ui-phone .country-list::-webkit-scrollbar-thumb:hover {
+   background: #6c757d; /* darker gray on hover */
+}
+
+/* Firefox scrollbar */
+.ui-phone .country-list {
+   scrollbar-width: thin;
+   scrollbar-color: #7f8694 #495057; /* thumb track */
+}
+
+/* Search input should remain LTR for Latin typing */
+[dir='rtl'] .ui-phone .react-tel-input .country-list {
+   direction: ltr; /* keeps flag + dial code spacing correct */
+   text-align: left; /* what you used to align content nicely */
+}

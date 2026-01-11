@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Allow: /en
+Allow: /ar
+
+# Disallow registration and form pages
+Disallow: /en/join/
+Disallow: /ar/join/
+Disallow: /en/share/
+Disallow: /ar/share/
+Disallow: /en/complete-data/
+Disallow: /ar/complete-data/
+Disallow: /en/registration-closed
+Disallow: /ar/registration-closed
+
+# Sitemap
+

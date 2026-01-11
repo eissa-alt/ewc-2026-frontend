@@ -1,0 +1,16 @@
+{
+    "main_title": "Welcome to the {{ site_name }}",
+    "event_name": "Gala Dinner",
+    "subtitle_1": "Attend by invitation or registration",
+    "subtitle_2": "The Platform will provide further details with respect to {{ event_name }} logistics, schedule and hospitality services",
+    "access_code_label": "If you received an access code with your invitation letter, please enter it below",
+    "access_code_label_1": "If you received an access code with your invitation letter,",
+    "access_code_label_2": "please enter it below",
+    "no_access_code_1": "Don't have an access code",
+    "no_access_code_2": "Request an invitation",
+    "note_1": "* Your ID/Passport/E-VISA and your personal photo are required to complete your registration process",
+    "note_2": "* Please make sure to have all necessary information ready to submit your online application",
+    "contact_us": "Please do not hesitate to contact our team at",
+    "for_delegates": "For delegates",
+    "for_speakers": "For speakers"
+}

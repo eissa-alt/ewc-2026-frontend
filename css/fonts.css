@@ -1,0 +1,122 @@
+/* numeric keyword values */
+
+/* 
+// font-weight: 100; // thin
+// font-weight: 200; // extralight
+// font-weight: 300; // light
+// font-weight: 400; // normal - regular
+// font-weight: 500; // medium
+// font-weight: 600; // semibold
+// font-weight: 700; // bold
+// font-weight: 800; // extrabold
+// font-weight: 900; // black
+
+/* 
+
+/* arabic fonts imports [Bukra] */
+/* 
+@font-face {
+   font-family: 'Bukra';
+   src: url('/fonts/Bukra/Bukra-Light.otf');
+   font-display: swap;
+   font-weight: 300;
+}
+@font-face {
+   font-family: 'Bukra';
+   src: url('/fonts/Bukra/Bukra-Regular.otf');
+   font-display: swap;
+   font-weight: 400;
+}
+
+@font-face {
+   font-family: 'Bukra';
+   src: url('/fonts/Bukra/Bukra-Medium.otf');
+   font-display: swap;
+   font-weight: 500;
+}
+
+@font-face {
+   font-family: 'Bukra';
+   src: url('/fonts/Bukra/Bukra-Bold2.otf');
+   font-display: swap;
+   font-weight: 600;
+} */
+
+/* @font-face {
+   font-family: 'Bukra';
+   src: url('/fonts/Bukra/Bukra-Bold2.otf');
+   font-display: swap;
+   font-weight: 700;
+} */
+
+/* english fonts imports [Montserrat] */
+
+@font-face {
+   font-family: 'Montserrat';
+   src: url('/fonts/Montserrat/Montserrat-Light.ttf');
+   font-display: swap;
+   font-weight: 300;
+}
+@font-face {
+   font-family: 'Montserrat';
+   src: url('/fonts/Montserrat/Montserrat-Regular.ttf');
+   font-display: swap;
+   font-weight: 400;
+}
+
+@font-face {
+   font-family: 'Montserrat';
+   src: url('/fonts/Montserrat/Montserrat-Medium.ttf');
+   font-display: swap;
+   font-weight: 500;
+}
+
+@font-face {
+   font-family: 'Montserrat';
+   src: url('/fonts/Montserrat/Montserrat-Semibold.ttf');
+   font-display: swap;
+   font-weight: 600;
+}
+
+@font-face {
+   font-family: 'Montserrat';
+   src: url('/fonts/Montserrat/Montserrat-Bold.ttf');
+   font-display: swap;
+   font-weight: 700;
+}
+
+/* arabic fonts imports [Cairo] */
+
+@font-face {
+   font-family: 'Cairo';
+   src: url('/fonts/Cairo/Cairo-Light.ttf');
+   font-display: swap;
+   font-weight: 300;
+}
+@font-face {
+   font-family: 'Cairo';
+   src: url('/fonts/Cairo/Cairo-Regular.ttf');
+   font-display: swap;
+   font-weight: 400;
+}
+
+@font-face {
+   font-family: 'Cairo';
+   src: url('/fonts/Cairo/Cairo-Medium.ttf');
+   font-display: swap;
+   font-weight: 500;
+}
+
+@font-face {
+   font-family: 'Cairo';
+   src: url('/fonts/Cairo/Cairo-Bold.ttf');
+   font-display: swap;
+   font-weight: 600;
+}
+
+@font-face {
+   font-family: 'Cairo';
+   src: url('/fonts/Cairo/Cairo-Bold.ttf');
+   font-display: swap;
+   font-weight: 900;
+}

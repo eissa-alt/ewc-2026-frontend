@@ -12,6 +12,7 @@ import isUniqueAttribute from '~/utils/unique-attribute';
 import Modal from '~/components/shared/modals';
 import VerifyEmailForm from '../../../verify-email-form';
 import CheckboxInput from '~/components/shared/forms/checkbox-input';
+import { XMarkIcon } from '@heroicons/react/20/solid';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import Axios from '~/utils/axios';
 import Cookies from 'js-cookie';
@@ -91,6 +92,7 @@ PersonalInfoShortProps) => {
    // console.log(guestFirstName, 'guestFirstName');
    // console.log(guestLastName, 'guestLastName');
    const [isOpen, setIsOpen] = useState(false);
+   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
    const { lang } = useTranslate();
 
    const {
@@ -611,9 +613,27 @@ PersonalInfoShortProps) => {
                            <div className="row">
                               <div className="col-12">
                                  <p className="text-white">
-                                    {lang === 'ar'
-                                       ? 'بإرسال هذا النموذج أوافق على شروط الفعالية وسياسة الخصوصية'
-                                       : 'By submitting this form I agree to the event terms and privacy policy'}
+                                    {lang === 'ar' ? (
+                                       <>
+                                          بإرسال هذا النموذج أوافق على{' '}
+                                          <button
+                                             type="button"
+                                             onClick={() => setIsPrivacyModalOpen(true)}
+                                             className="cursor-pointer underline transition-colors hover:text-primary">
+                                             شروط الفعالية وسياسة الخصوصية
+                                          </button>
+                                       </>
+                                    ) : (
+                                       <>
+                                          By submitting this form I agree to the event{' '}
+                                          <button
+                                             type="button"
+                                             onClick={() => setIsPrivacyModalOpen(true)}
+                                             className="cursor-pointer underline transition-colors hover:text-primary">
+                                             terms and privacy policy
+                                          </button>
+                                       </>
+                                    )}
                                  </p>
                               </div>
                            </div>
@@ -695,6 +715,70 @@ PersonalInfoShortProps) => {
                               />
                            </div>
                         </div>
+                     </div>
+                  </div>
+               </div>
+            </Modal.Body>
+         </Modal>
+
+         {/* Privacy Policy Modal */}
+         <Modal
+            size={1024}
+            open={isPrivacyModalOpen}
+            onClickOutside={() => setIsPrivacyModalOpen(false)}>
+            <Modal.Body>
+               <div className="relative rounded-xl border border-white/20 bg-gradient-to-b from-black via-black to-gray-900 shadow-2xl">
+                  <style jsx>{`
+                     .privacy-scrollbar::-webkit-scrollbar {
+                        width: 8px;
+                     }
+                     .privacy-scrollbar::-webkit-scrollbar-track {
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 4px;
+                     }
+                     .privacy-scrollbar::-webkit-scrollbar-thumb {
+                        background: rgba(255, 255, 255, 0.3);
+                        border-radius: 4px;
+                     }
+                     .privacy-scrollbar::-webkit-scrollbar-thumb:hover {
+                        background: rgba(255, 255, 255, 0.5);
+                     }
+                  `}</style>
+                  <button
+                     type="button"
+                     onClick={() => setIsPrivacyModalOpen(false)}
+                     className="absolute top-6 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-all hover:scale-110 hover:bg-white/20 hover:text-primary ltr:right-6 rtl:left-6">
+                     <XMarkIcon className="h-6 w-6" />
+                  </button>
+                  <div className="privacy-scrollbar max-h-[85vh] overflow-y-auto">
+                     <div className="p-6 ltr:pr-14 rtl:pl-14 sm:p-8 md:p-12">
+                        {lang === 'ar' ? (
+                           <div className="space-y-6 text-white" dir="rtl">
+                              <div className="border-b border-white/20 pb-3">
+                                 <h2 className="from-primary to-accent bg-clip-text text-2xl font-bold text-transparent ltr:bg-gradient-to-r rtl:bg-gradient-to-l md:text-3xl">
+                                    سياسة الخصوصية
+                                 </h2>
+                              </div>
+                              <div className="rounded-lg border border-white/10 bg-white/5 p-5">
+                                 <p className="text-sm leading-relaxed text-white/90">
+                                    بإرسال هذا النموذج، أنت توافق على شروط الفعالية وسياسة الخصوصية.
+                                 </p>
+                              </div>
+                           </div>
+                        ) : (
+                           <div className="space-y-6 text-white">
+                              <div className="border-b border-white/20 pb-3">
+                                 <h2 className="bg-gradient-to-r from-primary to-accent bg-clip-text text-2xl font-bold text-transparent md:text-3xl">
+                                    Privacy Policy
+                                 </h2>
+                              </div>
+                              <div className="rounded-lg border border-white/10 bg-white/5 p-5">
+                                 <p className="text-sm leading-relaxed text-white/90">
+                                    By submitting this form, you agree to the event terms and privacy policy.
+                                 </p>
+                              </div>
+                           </div>
+                        )}
                      </div>
                   </div>
                </div>

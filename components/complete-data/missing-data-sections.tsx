@@ -1,6 +1,6 @@
 import { useTranslate } from '~/i18n';
 import classNames from 'classnames';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 // import CustomMultiSelect from '../shared/forms/custom-multi-select';
 import { GuestType } from '~/interfaces/guest';
 import { toast } from 'react-hot-toast';
@@ -38,6 +38,12 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
    const { translate, lang } = useTranslate();
    const [loading, setLoading] = useState(false);
    const router = useRouter();
+   const methods = useForm<GuestType>({
+      defaultValues: {
+         ...guestData,
+      },
+   });
+
    const {
       handleSubmit,
       getValues,
@@ -46,11 +52,7 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
       register,
       watch,
       formState: { errors },
-   } = useForm<GuestType>({
-      defaultValues: {
-         ...guestData,
-      },
-   });
+   } = methods;
 
    // const [countries, setCountriesList] = useState<CountryType[]>([]);
 
@@ -102,11 +104,11 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
          <div className="container relative py-10">
             <div className="row">
                <div className="lg:col-8 lg:offset-2 xl:col-8 xl:offset-2">
-                  <div className="rounded-lg border bg-white shadow-[0px_7px_29px_0px_rgba(100,100,111,0.2)]">
+                  <div className="rounded-lg border shadow-[0px_7px_29px_0px_rgba(100,100,111,0.2)]">
                      <div className="p-6 sm:p-12">
                         <h2
                            className={classNames(
-                              'text-xl font-bold text-gray-800 md:mb-4 md:text-2xl'
+                              'text-xl font-bold text-white md:mb-4 md:text-2xl'
                            )}>
                            {/* todo */}
                            Required Information to Complete Your Registration
@@ -114,117 +116,121 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
 
                         <div className="pt-5">
                            <div className="pt-5">
-                              <form
-                                 noValidate
-                                 onSubmit={handleSubmit(submitForm)}
-                                 className="relative"
-                                 autoComplete="off">
-                                 {/* gender */}
-                                 <CustomRadioInput
-                                    label={translate({ id: 'web:gender' })}
-                                    isRequired
-                                    isInline
-                                    options={[
-                                       { value: 'male', label: translate({ id: 'web:male' }) },
-                                       { value: 'female', label: translate({ id: 'web:female' }) },
-                                    ]}
-                                    id="gender"
-                                    error={errors.gender?.message}
-                                    {...register('gender', {
-                                       required: translate({ id: 'validation:required' }),
-                                    })}
-                                 />
-                                 {/* title_id */}
-                                 <Controller
-                                    name="title_id"
-                                    control={control}
-                                    render={() => (
-                                       <TitleSelectNew
-                                          // role={role}
-                                          gender={watch('gender')}
-                                          isRequired={true}
-                                          selected_id={getValues()['title_id']} // on edit
-                                          label={translate({ id: 'web:title' })}
-                                          errors={errors.title_id?.message}
-                                          callBack={(item: { value: string } | null) => {
-                                             setValue('title_id', item?.value || null, {
-                                                shouldValidate: true,
-                                             });
-                                          }}
-                                       />
-                                    )}
-                                    rules={{
-                                       required: translate({ id: 'validation:required' }),
-                                    }}
-                                 />
+                              <FormProvider {...methods}>
+                                 <form
+                                    noValidate
+                                    onSubmit={handleSubmit(submitForm)}
+                                    className="relative"
+                                    autoComplete="off">
+                                    {/* gender */}
+                                    <CustomRadioInput
+                                       label={translate({ id: 'web:gender' })}
+                                       isRequired
+                                       isInline
+                                       options={[
+                                          { value: 'male', label: translate({ id: 'web:male' }) },
+                                          {
+                                             value: 'female',
+                                             label: translate({ id: 'web:female' }),
+                                          },
+                                       ]}
+                                       id="gender"
+                                       error={errors.gender?.message}
+                                       {...register('gender', {
+                                          required: translate({ id: 'validation:required' }),
+                                       })}
+                                    />
+                                    {/* title_id */}
+                                    <Controller
+                                       name="title_id"
+                                       control={control}
+                                       render={() => (
+                                          <TitleSelectNew
+                                             // role={role}
+                                             gender={watch('gender')}
+                                             isRequired={true}
+                                             selected_id={getValues()['title_id']} // on edit
+                                             label={translate({ id: 'web:title' })}
+                                             errors={errors.title_id?.message}
+                                             callBack={(item: { value: string } | null) => {
+                                                setValue('title_id', item?.value || null, {
+                                                   shouldValidate: true,
+                                                });
+                                             }}
+                                          />
+                                       )}
+                                       rules={{
+                                          required: translate({ id: 'validation:required' }),
+                                       }}
+                                    />
 
-                                 {/* first_name */}
-                                 <CustomInput
-                                    label={translate({ id: 'web:first_name' })}
-                                    type="text"
-                                    isRequired
-                                    isInline
-                                    autoComplete="off"
-                                    placeHolder={translate({ id: 'web:first_name' })}
-                                    id="first_name"
-                                    // disabled={  !== null}
-                                    error={errors.first_name?.message}
-                                    {...register('first_name', {
-                                       required: translate({ id: 'validation:required' }),
-                                       pattern: {
-                                          value: /^[a-zA-Z0-9 -]+$/i,
-                                          message: translate({
-                                             id: 'validation:english_letters',
-                                          }),
-                                       },
-                                    })}
-                                 />
+                                    {/* first_name */}
+                                    <CustomInput
+                                       label={translate({ id: 'web:first_name' })}
+                                       type="text"
+                                       isRequired
+                                       isInline
+                                       autoComplete="off"
+                                       placeHolder={translate({ id: 'web:first_name' })}
+                                       id="first_name"
+                                       // disabled={  !== null}
+                                       error={errors.first_name?.message}
+                                       {...register('first_name', {
+                                          required: translate({ id: 'validation:required' }),
+                                          pattern: {
+                                             value: /^[a-zA-Z0-9 -]+$/i,
+                                             message: translate({
+                                                id: 'validation:english_letters',
+                                             }),
+                                          },
+                                       })}
+                                    />
 
-                                 {/* last_name */}
-                                 <CustomInput
-                                    label={translate({ id: 'web:last_name' })}
-                                    type="text"
-                                    autoComplete="off"
-                                    placeHolder={translate({ id: 'web:last_name' })}
-                                    id="last_name"
-                                    isRequired
-                                    isInline
-                                    // disabled={guestLastName !== null}
-                                    error={errors.last_name?.message}
-                                    {...register('last_name', {
-                                       required: translate({ id: 'validation:required' }),
-                                       pattern: {
-                                          value: /^[a-zA-Z0-9 -]+$/i,
-                                          message: translate({
-                                             id: 'validation:english_letters',
-                                          }),
-                                       },
-                                    })}
-                                 />
+                                    {/* last_name */}
+                                    <CustomInput
+                                       label={translate({ id: 'web:last_name' })}
+                                       type="text"
+                                       autoComplete="off"
+                                       placeHolder={translate({ id: 'web:last_name' })}
+                                       id="last_name"
+                                       isRequired
+                                       isInline
+                                       // disabled={guestLastName !== null}
+                                       error={errors.last_name?.message}
+                                       {...register('last_name', {
+                                          required: translate({ id: 'validation:required' }),
+                                          pattern: {
+                                             value: /^[a-zA-Z0-9 -]+$/i,
+                                             message: translate({
+                                                id: 'validation:english_letters',
+                                             }),
+                                          },
+                                       })}
+                                    />
 
-                                 {/* company */}
-                                 <CustomInput
-                                    label={translate({ id: 'web:company' })}
-                                    type="text"
-                                    autoComplete="off"
-                                    // disabled={!!user && role !== 'xrole-name'}
-                                    placeHolder={translate({ id: 'web:company' })}
-                                    id="company"
-                                    isRequired
-                                    isInline
-                                    error={errors.company?.message}
-                                    {...register('company', {
-                                       required: translate({ id: 'validation:required' }),
-                                       maxLength: {
-                                          value: 100,
-                                          message: translate({
-                                             id: 'validation:you_reached_the_text_limit',
-                                          }),
-                                       },
-                                    })}
-                                 />
-                                 {/* position_id */}
-                                 {/* <Controller
+                                    {/* company */}
+                                    <CustomInput
+                                       label={translate({ id: 'web:company' })}
+                                       type="text"
+                                       autoComplete="off"
+                                       // disabled={!!user && role !== 'xrole-name'}
+                                       placeHolder={translate({ id: 'web:company' })}
+                                       id="company"
+                                       isRequired
+                                       isInline
+                                       error={errors.company?.message}
+                                       {...register('company', {
+                                          required: translate({ id: 'validation:required' }),
+                                          maxLength: {
+                                             value: 100,
+                                             message: translate({
+                                                id: 'validation:you_reached_the_text_limit',
+                                             }),
+                                          },
+                                       })}
+                                    />
+                                    {/* position_id */}
+                                    {/* <Controller
                            name="position_id"
                            control={control}
                            render={() => (
@@ -246,29 +252,29 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
                            }}
                         /> */}
 
-                                 {/* job_title */}
-                                 <CustomInput
-                                    label={translate({ id: 'web:job_title' })}
-                                    type="text"
-                                    autoComplete="off"
-                                    // disabled={!!user && role !== 'xrole-name'}
-                                    placeHolder={translate({ id: 'web:job_title' })}
-                                    id="job_title"
-                                    isRequired
-                                    isInline
-                                    error={errors.job_title?.message}
-                                    {...register('job_title', {
-                                       required: translate({ id: 'validation:required' }),
-                                       maxLength: {
-                                          value: 100,
-                                          message: translate({
-                                             id: 'validation:you_reached_the_text_limit',
-                                          }),
-                                       },
-                                    })}
-                                 />
-                                 {/* org_size */}
-                                 {/* <div className="row">
+                                    {/* job_title */}
+                                    <CustomInput
+                                       label={translate({ id: 'web:job_title' })}
+                                       type="text"
+                                       autoComplete="off"
+                                       // disabled={!!user && role !== 'xrole-name'}
+                                       placeHolder={translate({ id: 'web:job_title' })}
+                                       id="job_title"
+                                       isRequired
+                                       isInline
+                                       error={errors.job_title?.message}
+                                       {...register('job_title', {
+                                          required: translate({ id: 'validation:required' }),
+                                          maxLength: {
+                                             value: 100,
+                                             message: translate({
+                                                id: 'validation:you_reached_the_text_limit',
+                                             }),
+                                          },
+                                       })}
+                                    />
+                                    {/* org_size */}
+                                    {/* <div className="row">
                            <div className="self-center md:mb-5 md:col-3">
                               <Label
                                  id="org_size"
@@ -316,8 +322,8 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
                               />
                            </div>
                         </div> */}
-                                 {/* industry */}
-                                 {/* <div className="row">
+                                    {/* industry */}
+                                    {/* <div className="row">
                            <div className="self-center md:mb-5 md:col-3">
                               <Label
                                  id="industry"
@@ -362,8 +368,8 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
                               />
                            </div>
                         </div> */}
-                                 {/* interests */}
-                                 {/* <div className="row">
+                                    {/* interests */}
+                                    {/* <div className="row">
                            <div className="self-center md:mb-5 md:col-3">
                               <Label
                                  id="interests"
@@ -412,8 +418,8 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
                            </div>
                         </div> */}
 
-                                 {/* interests */}
-                                 {/* <CheckboxInput
+                                    {/* interests */}
+                                    {/* <CheckboxInput
                            label={translate({ id: 'web:interests' })}
                            isRequired
                            isInline
@@ -425,8 +431,8 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
                            })}
                         /> */}
 
-                                 {/* city */}
-                                 {/* <CustomInput
+                                    {/* city */}
+                                    {/* <CustomInput
                            label={translate({ id: 'web:city' })}
                            type="text"
                            autoComplete="off"
@@ -441,92 +447,99 @@ const MissingDataSections = ({ token, guestData }: MissingDataSectionsProps) => 
                            })}
                         /> */}
 
-                                 {/* email */}
-                                 <CustomInput
-                                    label={translate({ id: 'web:email' })}
-                                    type="email"
-                                    // disabled={!!user && role == 'xrole-name'}
-                                    isRequired
-                                    isInline
-                                    placeHolder={translate({ id: 'web:email' })}
-                                    id="email"
-                                    disabled={
-                                       // guestEmail !== null ||
-                                       getValues('is_email_verified') === 'yes'
-                                    }
-                                    error={errors.email?.message}
-                                    {...register('email', {
-                                       required: translate({ id: 'validation:required' }),
-                                       // value: guestEmail,
-                                       validate: {
-                                          trim: (value: any) =>
-                                             value == value.trim() || 'يرجى حذف المسافات',
-                                          isEmail: value =>
-                                             validator.isEmail(value || '') ||
-                                             translate({ id: 'validation:not_email' }),
-                                          isUnique: async value => {
-                                             const { isUnique, status } = await isUniqueAttribute(
-                                                'guests',
-                                                'email',
-                                                value,
-                                                'create',
-                                                getValues('id')
-                                             );
-                                             if (!isUnique && status === 422) {
-                                                return translate({ id: 'validation:unique_email' });
-                                             } else if (!isUnique) {
-                                                return translate({
-                                                   id: 'validation:unique_email_failed',
-                                                });
-                                             } else {
-                                                return true;
-                                             }
+                                    {/* email */}
+                                    <CustomInput
+                                       label={translate({ id: 'web:email' })}
+                                       type="email"
+                                       // disabled={!!user && role == 'xrole-name'}
+                                       isRequired
+                                       isInline
+                                       placeHolder={translate({ id: 'web:email' })}
+                                       id="email"
+                                       disabled={
+                                          // guestEmail !== null ||
+                                          getValues('is_email_verified') === 'yes'
+                                       }
+                                       error={errors.email?.message}
+                                       {...register('email', {
+                                          required: translate({ id: 'validation:required' }),
+                                          // value: guestEmail,
+                                          validate: {
+                                             trim: (value: any) =>
+                                                value == value.trim() || 'يرجى حذف المسافات',
+                                             isEmail: value =>
+                                                validator.isEmail(value || '') ||
+                                                translate({ id: 'validation:not_email' }),
+                                             isUnique: async value => {
+                                                const guestId = getValues('id');
+                                                // Use 'edit' mode if updating existing guest, 'create' for new
+                                                const mode = guestId ? 'edit' : 'create';
+                                                const { isUnique, status } =
+                                                   await isUniqueAttribute(
+                                                      'guests',
+                                                      'email',
+                                                      value,
+                                                      mode,
+                                                      guestId
+                                                   );
+                                                if (!isUnique && status === 422) {
+                                                   return translate({
+                                                      id: 'validation:unique_email',
+                                                   });
+                                                } else if (!isUnique) {
+                                                   return translate({
+                                                      id: 'validation:unique_email_failed',
+                                                   });
+                                                } else {
+                                                   return true;
+                                                }
+                                             },
                                           },
-                                       },
-                                    })}
-                                 />
-                                 {/* phone (single field with flags + masking; stores E.164 in `phone`) */}
-                                 <Controller
-                                    name="phone"
-                                    control={control}
-                                    rules={{
-                                       required: translate({ id: 'validation:required' }),
-                                       validate: (v?: string | null) => {
-                                          const s = (v ?? '').replace(/\s+/g, '');
-                                          const pn = parsePhoneNumberFromString(s);
-                                          return pn?.isValid()
-                                             ? true
-                                             : translate({ id: 'validation:invalid_phone' });
-                                       },
-                                    }}
-                                    render={({ field }) => (
-                                       <PhoneInputV2
-                                          lang={lang}
-                                          label={translate({ id: 'web:phone' })}
-                                          isInline
-                                          isRequired
-                                          defaultCountry="sa"
-                                          // onlyCountries={ONLY_COUNTRIES}
-                                          value={field.value ?? ''}
-                                          onChange={field.onChange}
-                                          // show error only after touch or submit
-                                          error={errors.phone?.message}
-                                       />
-                                    )}
-                                 />
-                                 <div className="mt-10">
-                                    <div className="row justify-end">
-                                       <div className="col-6 sm:col-3">
-                                          <SubmitBtn
-                                             id="submit-btn" //* for test cases
-                                             loading={loading}
-                                             className="w-full overflow-hidden rounded-md bg-primary p-3"
-                                             text={`${translate({ id: `web:next` })}`}
+                                       })}
+                                    />
+                                    {/* phone (single field with flags + masking; stores E.164 in `phone`) */}
+                                    <Controller
+                                       name="phone"
+                                       control={control}
+                                       rules={{
+                                          required: translate({ id: 'validation:required' }),
+                                          validate: (v?: string | null) => {
+                                             const s = (v ?? '').replace(/\s+/g, '');
+                                             const pn = parsePhoneNumberFromString(s);
+                                             return pn?.isValid()
+                                                ? true
+                                                : translate({ id: 'validation:invalid_phone' });
+                                          },
+                                       }}
+                                       render={({ field }) => (
+                                          <PhoneInputV2
+                                             lang={lang}
+                                             label={translate({ id: 'web:phone' })}
+                                             isInline
+                                             isRequired
+                                             defaultCountry="sa"
+                                             // onlyCountries={ONLY_COUNTRIES}
+                                             value={field.value ?? ''}
+                                             onChange={field.onChange}
+                                             // show error only after touch or submit
+                                             error={errors.phone?.message}
                                           />
+                                       )}
+                                    />
+                                    <div className="mt-10">
+                                       <div className="row justify-end">
+                                          <div className="col-6 sm:col-3">
+                                             <SubmitBtn
+                                                id="submit-btn" //* for test cases
+                                                loading={loading}
+                                                className="w-full overflow-hidden rounded-md bg-primary p-3"
+                                                text={`${translate({ id: `web:next` })}`}
+                                             />
+                                          </div>
                                        </div>
                                     </div>
-                                 </div>
-                              </form>
+                                 </form>
+                              </FormProvider>
                            </div>
                         </div>
                      </div>

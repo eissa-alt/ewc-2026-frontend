@@ -774,7 +774,8 @@ PersonalInfoShortProps) => {
                               </div>
                               <div className="rounded-lg border border-white/10 bg-white/5 p-5">
                                  <p className="text-sm leading-relaxed text-white/90">
-                                    By submitting this form, you agree to the event terms and privacy policy.
+                                    By submitting this form, you agree to the event terms and
+                                    privacy policy.
                                  </p>
                               </div>
                            </div>

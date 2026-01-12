@@ -139,6 +139,8 @@ export const renderFormSteps = ({
                   guestLastName,
                   guestPhone,
                   guestTitleId,
+                  prefilldata,
+                  lock_data,
                   optionalFields,
                   mandatoryFields,
                   withOtp: withOtp || false,

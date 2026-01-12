@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import SubmitBtn from '~/components/shared/buttons/submit-btn';
 import CustomInput from '~/components/shared/forms/custom-input';
@@ -41,6 +41,10 @@ type PersonalInfoProps = {
    guestEmail?: string | null;
    guestFirstName?: string | null;
    guestLastName?: string | null;
+   guestPhone?: string | null;
+   guestTitleId?: string | null;
+   prefilldata?: string | null;
+   lock_data?: string | null;
    role?: string;
    optionalFields?: string[];
    mandatoryFields?: string[];
@@ -55,6 +59,10 @@ const PersonalInfo = ({
    guestEmail,
    guestFirstName,
    guestLastName,
+   guestPhone,
+   guestTitleId,
+   prefilldata,
+   lock_data,
    role,
    mandatoryFields,
    withOtp,
@@ -215,6 +223,7 @@ const PersonalInfo = ({
                                  selected_id={watch('title_id')}
                                  label={translate({ id: 'web:title' })}
                                  errors={errors.title_id?.message}
+                                 disabled={isLocked}
                                  callBack={(item: { value: string } | null) => {
                                     setValue('title_id', item?.value || null, {
                                        shouldValidate: true,
@@ -236,7 +245,7 @@ const PersonalInfo = ({
                            autoComplete="off"
                            placeHolder={translate({ id: 'web:first_name' })}
                            id="first_name"
-                           disabled={guestFirstName !== null}
+                           disabled={isLocked}
                            error={errors.first_name?.message}
                            {...register('first_name', {
                               required: translate({ id: 'validation:required' }),
@@ -258,7 +267,7 @@ const PersonalInfo = ({
                            id="last_name"
                            isRequired
                            isInline
-                           disabled={guestLastName !== null}
+                           disabled={isLocked}
                            error={errors.last_name?.message}
                            {...register('last_name', {
                               required: translate({ id: 'validation:required' }),
@@ -330,6 +339,7 @@ const PersonalInfo = ({
                            id="company"
                            isRequired
                            isInline
+                           disabled={isLocked}
                            error={errors.company?.message}
                            {...register('company', {
                               required: translate({ id: 'validation:required' }),
@@ -350,6 +360,7 @@ const PersonalInfo = ({
                            id="job_title"
                            isRequired
                            isInline
+                           disabled={isLocked}
                            error={errors.job_title?.message}
                            {...register('job_title', {
                               required: translate({ id: 'validation:required' }),
@@ -487,7 +498,7 @@ const PersonalInfo = ({
                            placeHolder={translate({ id: 'web:email' })}
                            id="email"
                            disabled={
-                              guestEmail !== null || getValues('is_email_verified') === 'yes'
+                              isLocked || getValues('is_email_verified') === 'yes'
                            }
                            error={errors.email?.message}
                            {...register('email', {
@@ -539,6 +550,7 @@ const PersonalInfo = ({
                                  defaultCountry="sa"
                                  value={field.value ?? ''}
                                  onChange={field.onChange}
+                                 disabled={isLocked}
                                  error={errors.phone?.message}
                               />
                            )}

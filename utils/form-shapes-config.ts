@@ -92,6 +92,35 @@ export const FORM_SHAPES_CONFIG: Record<string, FormShapeConfig> = {
          },
       ],
    },
+   // EWC 4 steps form
+   'ewc-four-steps': {
+      value: 'ewc-four-steps',
+      project: 'ewc',
+      flow: 'fours-steps',
+      stepsCount: 4,
+      steps: [
+         {
+            id: 'personal-info-1',
+            name: 'web:personal-info-1',
+            componentPath: '/ewc/fours-steps/step-1',
+         },
+         {
+            id: 'personal-info-2',
+            name: 'web:personal-info-2',
+            componentPath: '/ewc/fours-steps/step-2',
+         },
+         {
+            id: 'flights-info',
+            name: 'web:flights-info',
+            componentPath: '/ewc/fours-steps/step-3',
+         },
+         {
+            id: 'accommodation-info',
+            name: 'web:accommodation-info',
+            componentPath: '/ewc/fours-steps/step-4',
+         },
+      ],
+   },
 };
 
 /**

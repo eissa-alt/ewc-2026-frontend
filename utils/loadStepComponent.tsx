@@ -19,6 +19,11 @@ const COMPONENT_MAP: Record<string, () => Promise<any>> = {
    '/hci/fours-steps/step-2': () => import('~/components/join/forms/hci/fours-steps/step-2'),
    '/hci/fours-steps/step-3': () => import('~/components/join/forms/hci/fours-steps/step-3'),
    '/hci/fours-steps/step-4': () => import('~/components/join/forms/hci/fours-steps/step-4'),
+   // EWC four-steps
+   '/ewc/fours-steps/step-1': () => import('~/components/join/forms/ewc/fours-steps/step-1'),
+   '/ewc/fours-steps/step-2': () => import('~/components/join/forms/ewc/fours-steps/step-2'),
+   '/ewc/fours-steps/step-3': () => import('~/components/join/forms/ewc/fours-steps/step-3'),
+   '/ewc/fours-steps/step-4': () => import('~/components/join/forms/ewc/fours-steps/step-4'),
 };
 
 /**

@@ -46,6 +46,8 @@ type PersonalInfoShortProps = {
    guestLastName?: string | null;
    guestCompany?: string | null;
    guestPosition?: string | null;
+   guestPhone?: string | null;
+   guestTitleId?: string | null;
    prefilldata?: string | null;
    lock_data?: string | null;
 
@@ -75,6 +77,8 @@ const PersonalInfoShort = ({
    guestLastName,
    guestCompany,
    guestPosition,
+   guestPhone,
+   guestTitleId,
    prefilldata,
    lock_data,
    role,
@@ -223,6 +227,12 @@ PersonalInfoShortProps) => {
          if (guestPosition) {
             setValue('job_title', guestPosition, { shouldValidate: false });
          }
+         if (guestPhone) {
+            setValue('phone', guestPhone, { shouldValidate: false });
+         }
+         if (guestTitleId) {
+            setValue('title_id', guestTitleId, { shouldValidate: false });
+         }
       }
    }, [
       prefilldata,
@@ -231,6 +241,8 @@ PersonalInfoShortProps) => {
       guestEmail,
       guestCompany,
       guestPosition,
+      guestPhone,
+      guestTitleId,
       setValue,
    ]);
 
@@ -296,6 +308,7 @@ PersonalInfoShortProps) => {
                                     selected_id={getValues()['title_id']} // on edit
                                     label={translate({ id: 'web:title' })}
                                     errors={errors.title_id?.message}
+                                    disabled={isLocked}
                                     callBack={(item: { value: string } | null) => {
                                        setValue('title_id', item?.value || null, {
                                           shouldValidate: true,
@@ -453,6 +466,7 @@ PersonalInfoShortProps) => {
                               id="job_title"
                               isRequired={mandatoryFields?.includes('job_title') ?? false}
                               isInline
+                              disabled={isLocked}
                               error={errors.job_title?.message}
                               {...register('job_title', {
                                  required: mandatoryFields?.includes('job_title')
@@ -583,6 +597,7 @@ PersonalInfoShortProps) => {
                                     // onlyCountries={ONLY_COUNTRIES}
                                     value={field.value ?? ''}
                                     onChange={field.onChange}
+                                    disabled={isLocked}
                                     // show error only after touch or submit
                                     error={errors.phone?.message}
                                  />

@@ -21,6 +21,8 @@ import { loadStepComponent } from './loadStepComponent';
  * @param guestLastName - Guest last name (prefill)
  * @param guestCompany - Guest company (prefill)
  * @param guestPosition - Guest position (prefill)
+ * @param guestPhone - Guest phone (prefill)
+ * @param guestTitleId - Guest title ID (prefill)
  * @param prefilldata - Prefill data
  * @param lock_data - Lock data
  * @param token - Invitation token
@@ -43,6 +45,8 @@ export const renderFormSteps = ({
    guestLastName,
    guestCompany,
    guestPosition,
+   guestPhone,
+   guestTitleId,
    prefilldata,
    lock_data,
    token,
@@ -64,6 +68,8 @@ export const renderFormSteps = ({
    guestLastName?: string | null;
    guestCompany?: string | null;
    guestPosition?: string | null;
+   guestPhone?: string | null;
+   guestTitleId?: string | null;
    prefilldata?: string | null;
    lock_data?: string | null;
    token?: string;
@@ -110,6 +116,8 @@ export const renderFormSteps = ({
                   guestLastName,
                   guestCompany,
                   guestPosition,
+                  guestPhone,
+                  guestTitleId,
                   prefilldata,
                   lock_data,
                   optionalFields,
@@ -129,6 +137,8 @@ export const renderFormSteps = ({
                   guestEmail,
                   guestFirstName,
                   guestLastName,
+                  guestPhone,
+                  guestTitleId,
                   optionalFields,
                   mandatoryFields,
                   withOtp: withOtp || false,

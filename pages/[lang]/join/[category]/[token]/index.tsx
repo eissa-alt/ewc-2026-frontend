@@ -20,6 +20,8 @@ type JoinWithTokenProps = {
    last_name: string;
    company: string;
    position: string;
+   phone: string | null;
+   title_id: string | null;
    prefilldata: string;
    lock_data: string;
    form_shape: string | null;
@@ -39,6 +41,8 @@ const JoinWithToken = ({
    last_name,
    company,
    position,
+   phone,
+   title_id,
    prefilldata,
    lock_data,
    form_shape,
@@ -67,6 +71,8 @@ const JoinWithToken = ({
             guestLastName={last_name}
             guestCompany={company}
             guestPosition={position}
+            guestPhone={phone}
+            guestTitleId={title_id}
             prefilldata={prefilldata}
             lock_data={lock_data}
             optionalFields={optional_fields}
@@ -112,6 +118,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
             email: data.email || null,
             company: data.company || null,
             position: data.position || null,
+            phone: data.phone || null,
+            title_id: data.title_id || null,
             prefilldata: data.prefilldata || null,
             lock_data: data.lock_data || null,
             form_shape: data.form_shape || null,

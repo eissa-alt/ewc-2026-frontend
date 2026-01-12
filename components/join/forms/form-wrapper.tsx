@@ -28,6 +28,8 @@ type JoinFormWrapperProps = {
    guestLastName?: string | null;
    guestCompany?: string | null;
    guestPosition?: string | null;
+   guestPhone?: string | null;
+   guestTitleId?: string | null;
    prefilldata?: string | null;
    lock_data?: string | null;
    form_shape: string | null; // Form shape identifier
@@ -47,6 +49,8 @@ const JoinFormWrapper = ({
    guestLastName,
    guestCompany,
    guestPosition,
+   guestPhone,
+   guestTitleId,
    prefilldata,
    lock_data,
    form_shape,
@@ -158,6 +162,8 @@ const JoinFormWrapper = ({
          guestLastName,
          guestCompany,
          guestPosition,
+         guestPhone,
+         guestTitleId,
          prefilldata,
          lock_data,
          token,
@@ -180,6 +186,8 @@ const JoinFormWrapper = ({
       guestLastName,
       guestCompany,
       guestPosition,
+      guestPhone,
+      guestTitleId,
       prefilldata,
       lock_data,
       token,

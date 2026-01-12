@@ -142,6 +142,38 @@ const PersonalInfo = ({
    const personal_image_x =
       (typeof window !== 'undefined' && localStorage.getItem('personal_image_x')) || '';
 
+   // Prefill fields when prefilldata is "yes"
+   useEffect(() => {
+      if (prefilldata === 'yes') {
+         if (guestFirstName) {
+            setValue('first_name', guestFirstName, { shouldValidate: false });
+         }
+         if (guestLastName) {
+            setValue('last_name', guestLastName, { shouldValidate: false });
+         }
+         if (guestEmail) {
+            setValue('email', guestEmail, { shouldValidate: false });
+         }
+         if (guestPhone) {
+            setValue('phone', guestPhone, { shouldValidate: false });
+         }
+         if (guestTitleId) {
+            setValue('title_id', guestTitleId, { shouldValidate: false });
+         }
+      }
+   }, [
+      prefilldata,
+      guestFirstName,
+      guestLastName,
+      guestEmail,
+      guestPhone,
+      guestTitleId,
+      setValue,
+   ]);
+
+   // Determine if fields should be locked
+   const isLocked = lock_data === 'yes';
+
    const getImgPlaceHolder = () => {
       switch (getValues('gender')) {
          case 'male':

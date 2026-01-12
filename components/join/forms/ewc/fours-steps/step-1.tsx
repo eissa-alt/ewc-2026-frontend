@@ -571,7 +571,7 @@ const PersonalInfo = ({
                                        <button
                                           type="button"
                                           onClick={() => setIsPrivacyModalOpen(true)}
-                                          className="underline transition-colors hover:text-primary">
+                                          className="cursor-pointer underline transition-colors hover:text-primary">
                                           شروط الفعالية وسياسة الخصوصية
                                        </button>
                                     </>
@@ -581,7 +581,7 @@ const PersonalInfo = ({
                                        <button
                                           type="button"
                                           onClick={() => setIsPrivacyModalOpen(true)}
-                                          className="underline transition-colors hover:text-primary">
+                                          className="cursor-pointer underline transition-colors hover:text-primary">
                                           terms and privacy policy
                                        </button>
                                     </>

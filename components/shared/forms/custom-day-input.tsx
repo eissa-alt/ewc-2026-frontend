@@ -182,6 +182,11 @@ const CustomDayInput = forwardRef<any, InputProps>(
                            onClick={() => setIsOpen(true)}
                            // value={selected && format(selected, 'dd/MM/yyyy')}
                            // defaultValue={selected && format(selected, 'dd/MM/yyyy')}
+                           style={
+                              value
+                                 ? { color: 'transparent', caretColor: 'transparent' }
+                                 : undefined
+                           }
                            className={classNames(
                               className,
                               'cursor-pointer rounded-xl',
@@ -193,7 +198,7 @@ const CustomDayInput = forwardRef<any, InputProps>(
                               prependPaddingClass && `${prependPaddingClass}`,
                               disabled &&
                                  'disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-50',
-                              value && 'text-transparent'
+                              value && '!text-transparent'
                            )}
                            disabled={disabled}
                            {...props}
